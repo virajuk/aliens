@@ -10,16 +10,16 @@ class Bug(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
         self.image = pygame.image.load("images/bug.png").convert_alpha()
-        self.rect = self.image.get_rect(topleft=pos)
+        self.rect = self.image.get_rect(center=pos)
         self.direction = pygame.math.Vector2(1, 0)
-        self.x_speed = 3
+        self.speed = 3
         self.y_change = 64
 
     def update(self):
-        self.rect.centerx += self.direction.x * self.x_speed
-        self.move()
+        self.rect.centerx += self.direction.x * self.speed
+        self.check_sides()
 
-    def move(self):
+    def check_sides(self):
         if self.rect.x <= 0:
             self.direction.x = 1
             self.rect.centery += self.y_change

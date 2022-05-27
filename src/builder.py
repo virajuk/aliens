@@ -6,6 +6,7 @@ from config import *
 from debug.debug import debug
 from src.bug import Bug
 from src.ship import Ship
+from src.bullet import Bullet
 
 from logs import get_logger
 logger = get_logger('my_app')
@@ -21,7 +22,8 @@ class Builder:
         self.bullet_sprites = pygame.sprite.Group()
         self.ship_sprites = pygame.sprite.Group()
 
-        self.add_ship()
+        self.ship = self.add_ship()
+        # self.add_bullet()
 
         self.no_of_bugs = 6
         self.add_bugs()
@@ -32,6 +34,8 @@ class Builder:
         self.bug_sprites.update()
         self.ship_sprites.draw(self.display_surf)
         self.ship_sprites.update()
+        self.bullet_sprites.draw(self.display_surf)
+        self.bullet_sprites.update()
 
     def add_bug(self):
 
@@ -56,6 +60,14 @@ class Builder:
 
     def add_ship(self):
 
-        pos = (int(WIDTH/2) - 32, HEIGHT - 64)
-        ship = Ship(pos)
+        pos = (int(WIDTH/2), HEIGHT - 32)
+        ship = Ship(pos, self.bullet_sprites)
         ship.add(self.ship_sprites)
+        return ship
+
+    # def add_bullet(self):
+    #
+    #     pos = self.ship.rect.center
+    #     bullet = Bullet(pos)
+    #     bullet.add(self.bullet_sprites)
+
