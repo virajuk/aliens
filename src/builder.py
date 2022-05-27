@@ -24,11 +24,12 @@ class Builder:
         self.add_ship()
 
         self.no_of_bugs = 6
-        self.add_bug()
+        self.add_bugs()
 
     def run(self):
 
         self.bug_sprites.draw(self.display_surf)
+        self.bug_sprites.update()
         self.ship_sprites.draw(self.display_surf)
         self.ship_sprites.update()
 
