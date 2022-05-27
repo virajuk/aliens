@@ -1,21 +1,29 @@
 import pygame
 
+from config import *
+from src.builder import Builder
+from debug.debug import debug
+
 
 class Game:
 
     def __init__(self):
 
         pygame.init()
-        self.screen = pygame.display.set_mode((1600, 900))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("ACID RAIN")
         self.background = pygame.image.load("images/background.jpg")
         self.fps = 60
         self.running = True
         self.clock = pygame.time.Clock()
 
+        self.builder = Builder()
+
     def run(self):
 
         while self.running:
+
+            self.screen.blit(self.background, (0, 0))
 
             for event in pygame.event.get():
 
@@ -23,7 +31,7 @@ class Game:
 
                     self.running = False
 
-            self.screen.blit(self.background, (0, 0))
+            self.builder.run()
             pygame.display.update()
             self.clock.tick(self.fps)
 
