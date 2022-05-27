@@ -1,5 +1,6 @@
 import pygame
 
+from config import *
 from logs import get_logger
 logger = get_logger('my_app')
 

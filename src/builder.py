@@ -5,6 +5,7 @@ import pygame
 from config import *
 from debug.debug import debug
 from src.bug import Bug
+from src.ship import Ship
 
 from logs import get_logger
 logger = get_logger('my_app')
@@ -20,12 +21,16 @@ class Builder:
         self.bullet_sprites = pygame.sprite.Group()
         self.ship_sprites = pygame.sprite.Group()
 
+        self.add_ship()
+
         self.no_of_bugs = 6
-        self.add_bugs()
+        self.add_bug()
 
     def run(self):
 
         self.bug_sprites.draw(self.display_surf)
+        self.ship_sprites.draw(self.display_surf)
+        self.ship_sprites.update()
 
     def add_bug(self):
 
@@ -47,3 +52,9 @@ class Builder:
             if bug_sprite.rect.colliderect(bug):
                 return True
         return False
+
+    def add_ship(self):
+
+        pos = (int(WIDTH/2) - 32, HEIGHT - 64)
+        ship = Ship(pos)
+        ship.add(self.ship_sprites)
