@@ -26,9 +26,11 @@ class Builder:
         # self.add_bullet()
 
         self.no_of_bugs = 6
-        self.add_bugs()
+        # self.add_bugs()
 
     def run(self):
+
+        self.add_bugs()
 
         self.bug_sprites.draw(self.display_surf)
         self.bug_sprites.update()
@@ -36,6 +38,8 @@ class Builder:
         self.ship_sprites.update()
         self.bullet_sprites.draw(self.display_surf)
         self.bullet_sprites.update()
+
+        self.bullet_hit_bug()
 
     def add_bug(self):
 
@@ -48,8 +52,9 @@ class Builder:
 
     def add_bugs(self):
 
-        for idx in range(0, self.no_of_bugs):
-            self.add_bug()
+        if len(self.bug_sprites) < self.no_of_bugs:
+            for idx in range(len(self.bug_sprites), self.no_of_bugs):
+                self.add_bug()
 
     def check_collision(self, bug):
 
@@ -65,9 +70,11 @@ class Builder:
         ship.add(self.ship_sprites)
         return ship
 
-    # def add_bullet(self):
-    #
-    #     pos = self.ship.rect.center
-    #     bullet = Bullet(pos)
-    #     bullet.add(self.bullet_sprites)
+    def bullet_hit_bug(self):
+
+        for bullet in self.bullet_sprites:
+
+            gets_hit = pygame.sprite.spritecollide(bullet, self.bug_sprites, True)
+            if gets_hit:
+                bullet.kill()
 
