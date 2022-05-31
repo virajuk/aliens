@@ -17,7 +17,8 @@ class Game:
         self.running = True
         self.clock = pygame.time.Clock()
 
-        self.builder = Builder()
+        self.builder = Builder(self.screen)
+        self.over = False
 
     def run(self):
 

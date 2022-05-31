@@ -11,14 +11,19 @@ logger = get_logger('my_app')
 
 class Ship(pygame.sprite.Sprite):
 
-    def __init__(self, pos, bullet_sprite):
+    def __init__(self, pos, bullet_sprite, screen):
         super().__init__()
+        self.screen = screen
         self.image = pygame.image.load("images/ship.png").convert_alpha()
         self.rect = self.image.get_rect(center=pos)
         self.direction = pygame.math.Vector2()
         self.speed = 5
         self.bullet_sprites = bullet_sprite
         self.bullet_fired = time.time()
+
+    def draw(self):
+
+        self.screen.blit(self.image, self.rect)
 
     def update(self):
         self.input()
