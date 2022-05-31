@@ -11,7 +11,6 @@ class Bullet(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load("images/bullet.png").convert_alpha()
         self.rect = self.image.get_rect(center=pos)
-        self.state = "READY"
         self.direction = pygame.math.Vector2(0, -1)
         self.speed = 10
 
